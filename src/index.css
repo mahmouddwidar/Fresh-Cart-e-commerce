@@ -1,0 +1,95 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap');
+
+:root {
+  /* Light theme (default) */
+  --main-color: #0aad0a;
+  --light-color: #f0f3f2;
+  --text-color: #000000;
+  --bg-color: #ffffff;
+  --shadow: rgba(145, 158, 171, .2) 0px 2px 4px -1px, rgba(145, 158, 171, .14) 0px 4px 5px 0px, rgba(145, 158, 171, .12) 0px 1px 10px 0px;
+  --font-family: 'Encode Sans Expanded', sans-serif;
+  --rating-color: #ffc908;
+  --favorite-placeholder-color: #bdbdbd;
+  --favorite-color: #dc3545;
+  --pagination-color: #0aad0a;
+  --pagination-hover-color: #ffffff;
+  --transition-speed: 0.3s;
+  --transition-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --icon-color: #000;
+  /* Default for light mode */
+  --logo-color: #21313C;
+  /* Default dark color for light mode */
+}
+
+[data-theme='dark'] {
+  --main-color: #0aad0a;
+  /* This will be changeable */
+  --light-color: #2d2d2d;
+  --text-color: #ffffff;
+  --bg-color: #1a1a1a;
+  --shadow: rgba(0, 0, 0, 0.3) 0px 2px 4px -1px, rgba(0, 0, 0, 0.24) 0px 4px 5px 0px, rgba(0, 0, 0, 0.22) 0px 1px 10px 0px;
+  --navbar-toggler-filter: invert(1);
+  --icon-color: #fff;
+  /* White for dark mode */
+  --logo-color: #fff;
+  /* White for dark mode */
+}
+
+body {
+  font-family: var(--font-family) !important;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  /* Adjust this value based on your navbar height */
+}
+
+.border-main {
+  border: 1px solid var(--main-color) !important;
+}
+
+.rating-color {
+  color: var(--rating-color);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+a,
+a:hover {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.product:hover {
+  box-shadow: var(--shadow);
+  border: solid 1px var(--main-color);
+}
+
+.product .btn {
+  transition: transform 0.8s, opacity 0.8s;
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.product:hover .btn {
+  opacity: 1;
+  transform: translateY(0%);
+
+}
+
+.font-sm {
+  font-size: 14px;
+}
+
+.text-main {
+  color: var(--main-color);
+}
+
+.bg-main {
+  background-color: var(--main-color) !important;
+}
+
+.bg-main-light {
+  background-color: var(--light-color) !important;
+}
