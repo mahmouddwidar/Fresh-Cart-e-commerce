@@ -1,8 +1,13 @@
 import Style from "./Navbar.module.css";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/imgs/freshcart-logo.svg";
+import { useContext } from "react";
+import { CartContext } from "../../Context/CartContext";
 
 export default function Navbar() {
+
+	let {cartCount} = useContext(CartContext);
+
 	return (
 		<nav className="navbar navbar-expand-lg bg-body-tertiary">
 			<div className="container-fluid container">
@@ -32,8 +37,14 @@ export default function Navbar() {
 								Products
 							</NavLink>
 						</li>
+						<li className="nav-item">
+							<NavLink className="nav-link" to="/cart">
+								Cart <span className="bg-success text-white p-1 rounded-1">{cartCount}</span>
+							</NavLink>
+						</li>
 					</ul>
 					<ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+						{/* TODO: Make sure icons are good, and responsive on small screens  */}
 						<li className="nav-item d-flex align-items-center">
 							<i className="fab fa-facebook-f me-3"></i>
 							<i className="fab fa-twitter me-3"></i>
