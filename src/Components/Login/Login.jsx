@@ -1,14 +1,16 @@
 import axios from "axios";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Bars } from "react-loader-spinner";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { UserContext } from "../../Context/UserContext";
 
 export default function Login() {
 	let navigate = useNavigate();
 	const [error, setError] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
+	const {setUserToken} = useContext(UserContext);
 
 	const validationSchema = Yup.object({
 		email: Yup.string()
@@ -40,6 +42,8 @@ export default function Login() {
 			.then((response) => {
 				if (response.data.message === "success") {
 					setIsLoading(false);
+					localStorage.setItem('userToken', response.data.token);
+					setUserToken(response.data.token);
 					navigate("/");
 				}
 			})
@@ -99,13 +103,16 @@ export default function Login() {
 						/>
 					</div>
 				) : (
-					<button
+					<div className="d-flex align-items-center">
+						<button
 						disabled={!(formik.isValid && formik.dirty)}
 						type="submit"
 						className="btn bg-main text-white"
 					>
 						Login
 					</button>
+					<Link to={'/register'} className="btn">Register Now</Link>
+					</div>
 				)}
 				{error && (
 					<div className="alert alert-danger mt-3 p-2">Fail, {error}</div>

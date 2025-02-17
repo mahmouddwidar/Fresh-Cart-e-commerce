@@ -7,6 +7,8 @@ import NotFound from "./Components/NotFound/NotFound";
 import Register from "./Components/Register/Register";
 import Cart from "./Components/Cart/Cart";
 import CartContextProvider from "./Context/CartContext";
+import UserContextProvider from "./Context/UserContext";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 
 function App() {
 	let routers = createBrowserRouter([
@@ -14,11 +16,11 @@ function App() {
 			path: "/",
 			element: <Layout />,
 			children: [
-				{ index: true, element: <Home /> },
+				{ index: true, element: <ProtectedRoute><Home /></ProtectedRoute> },
 				{ path: "register", element: <Register /> },
 				{ path: "login", element: <Login /> },
-				{ path: "products", element: <Products /> },
-				{ path: "cart", element: <Cart /> },
+				{ path: "products", element: <ProtectedRoute><Products /></ProtectedRoute> },
+				{ path: "cart", element: <ProtectedRoute><Cart /></ProtectedRoute> },
 				{ path: "*", element: <NotFound /> },
 			],
 		},
@@ -26,9 +28,11 @@ function App() {
 
 	return (
 		<>
-			<CartContextProvider>
-				<RouterProvider router={routers}></RouterProvider>
-			</CartContextProvider>
+			<UserContextProvider>
+				<CartContextProvider>
+					<RouterProvider router={routers}></RouterProvider>
+				</CartContextProvider>
+			</UserContextProvider>
 		</>
 	);
 }
