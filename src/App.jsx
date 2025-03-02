@@ -9,6 +9,7 @@ import Cart from "./Components/Cart/Cart";
 import CartContextProvider from "./Context/CartContext";
 import UserContextProvider from "./Context/UserContext";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 function App() {
 	let routers = createBrowserRouter([
@@ -26,14 +27,16 @@ function App() {
 		},
 	]);
 
+	let queryClient = new QueryClient();
+
 	return (
-		<>
+		<QueryClientProvider client={queryClient}>
 			<UserContextProvider>
 				<CartContextProvider>
 					<RouterProvider router={routers}></RouterProvider>
 				</CartContextProvider>
 			</UserContextProvider>
-		</>
+		</QueryClientProvider>
 	);
 }
 
