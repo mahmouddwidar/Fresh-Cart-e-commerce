@@ -32,18 +32,20 @@ export default function Home() {
 		return axios.get("https://ecommerce.routemisr.com/api/v1/products");
 	}
 
-	let { data, isLoading, isError, isFetching } = useQuery(
+	let { data, isLoading, isError, error, isFetching } = useQuery(
 		"products",
 		getAllProducts
 	);
 
 	let { addToCart } = useContext(CartContext);
+	
 
 	return (
 		<section
-			className="container d-flex justify-content-center align-items-center py-4 my-4"
+			className="container py-4 my-4"
 			style={{ minHeight: "80vh" }}
 		>
+			{isError && (<p className="alert alert-danger">Error happened: {error.message}</p>)}
 			{isLoading ? (
 				<div className="d-flex justify-content-center align-items-center">
 					<Grid
@@ -58,7 +60,7 @@ export default function Home() {
 					/>
 				</div>
 			) : (
-				<div className="row justify-content-between align-items-center mx-auto">
+				<div className="row justify-content-between align-items-center flex-wrap mx-auto">
 					{data?.data.data.map((product, index) => {
 						return (
 							<Link
@@ -71,7 +73,7 @@ export default function Home() {
 									<img
 										src={product.imageCover}
 										alt={product.title}
-										className="w-100 card-img-top"
+										className="w-100"
 									/>
 									<button
 										className={`${Style.addToCart} d-flex justify-content-between align-items-center`}
@@ -110,5 +112,6 @@ export default function Home() {
 				</div>
 			)}
 		</section>
+		// <div>Home</div>
 	);
 }
