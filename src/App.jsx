@@ -9,6 +9,7 @@ import Cart from "./Components/Cart/Cart";
 import CartContextProvider from "./Context/CartContext";
 import UserContextProvider from "./Context/UserContext";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
 				{ path: "register", element: <Register /> },
 				{ path: "login", element: <Login /> },
 				{ path: "products", element: <ProtectedRoute><Products /></ProtectedRoute> },
+				{ path: "product/:id", element: <ProtectedRoute><ProductDetails /></ProtectedRoute> },
 				{ path: "cart", element: <ProtectedRoute><Cart /></ProtectedRoute> },
 				{ path: "*", element: <NotFound /> },
 			],

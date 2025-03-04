@@ -6,19 +6,20 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../../Context/UserContext";
 
 export default function Layout() {
+	let { setUserToken } = useContext(UserContext);
 
-	let {setUserToken}= useContext(UserContext);
-	
-	useEffect( ()=> {
-		if(localStorage.getItem('userToken') !== null) {
-			setUserToken(localStorage.getItem('userToken'));
+	useEffect(() => {
+		if (localStorage.getItem("userToken") !== null) {
+			setUserToken(localStorage.getItem("userToken"));
 		}
-	}, [])
+	}, []);
 
 	return (
 		<>
 			<Navbar />
-			<Outlet />
+			<div className="container">
+				<Outlet />
+			</div>
 			<Footer />
 		</>
 	);
