@@ -60,7 +60,7 @@ export default function FeaturedProducts() {
 						return (
 							<Link
 								to={`/product/${product.id}`}
-								className={`${Style.product} align-self-start card text-decoration-none col-md-3 col-lg-2 m-2`}
+								className={`${Style.product} align-self-start card text-decoration-none col-md-3 col-lg-2 m-2 z-0`}
 								style={{ "--i": index + 1 }}
 								key={index}
 							>
@@ -73,7 +73,8 @@ export default function FeaturedProducts() {
 									<button
 										className={`${Style.addToCart} d-flex justify-content-between align-items-center bg-main`}
 										title="Add To Cart"
-										onClick={() => {
+										onClick={(e) => {
+											e.stopPropagation(); e.preventDefault();
 											addToCart(1);
 										}}
 									>
