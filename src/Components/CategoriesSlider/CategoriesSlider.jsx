@@ -12,7 +12,6 @@ export default function CategoriesSlider() {
 		speed: 4000,
 		autoplaySpeed: 1,
 		cssEase: "linear",
-		lazyLoad: true,
 	};
 
 	function getAllCategoriesImages() {
@@ -25,15 +24,18 @@ export default function CategoriesSlider() {
 
 	return (
 		<>
-			<div className="slider-container">
+			<div className="slider-container staggered-animation" style={{ '--i': 3 }}>
 				<Slider {...settings} className="my-4">
 					{categories?.map((category, index) => (
-						<img
-							key={index}
-							src={category.image}
-							alt={category.name}
-							className={`${Style.img}`}
-						/>
+						<>
+							<img
+								key={index}
+								src={category.image}
+								alt={category.name}
+								className={`${Style.img}`}
+							/>
+							<h2 className="h6 mt-2 fw-semibold">{category.name}</h2>
+						</>
 					))}
 				</Slider>
 			</div>

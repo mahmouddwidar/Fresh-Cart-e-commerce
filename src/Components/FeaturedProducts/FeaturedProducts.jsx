@@ -55,12 +55,12 @@ export default function FeaturedProducts() {
 					/>
 				</div>
 			) : (
-				<div className="row justify-content-between align-items-center mx-auto">
+				<div className="row justify-content-between align-items-center mx-auto staggered-animation" style={{ '--i': 4 }}>
 					{data?.data.data.map((product, index) => {
 						return (
 							<Link
 								to={`/product/${product.id}`}
-								className={`${Style.product} align-self-start card text-decoration-none col-md-3 col-lg-2 m-2 z-0`}
+								className={`${Style.product} staggered-animation align-self-start card text-decoration-none col-md-3 col-lg-2 m-2 z-0`}
 								style={{ "--i": index + 1 }}
 								key={index}
 							>
