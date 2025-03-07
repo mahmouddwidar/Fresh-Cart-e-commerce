@@ -1,1 +1,24 @@
-.Layout {}
+.network-offline {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: #FFF;
+    padding: 20px;
+    z-index: 9999;
+    box-shadow: var(--shadow);
+    border-radius: 10px;
+    border: 1px solid red;
+}
+
+.network-offline i {
+    opacity: .1;
+    animation-name: fade;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes fade {
+    to {opacity: 1;}
+}
