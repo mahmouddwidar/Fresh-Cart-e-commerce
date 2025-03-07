@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useFormik } from "formik";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { FallingLines } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -71,111 +72,120 @@ export default function Register() {
 	}
 
 	return (
-		<div className="w-75 mx-auto py-4 px-2">
-			<h2>Register Now</h2>
-			<form onSubmit={formik.handleSubmit}>
-				<label htmlFor="name">Name: </label>
-				<input
-					className="form-control mb-2"
-					type="text"
-					name="name"
-					id="name"
-					value={formik.values.name}
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
+		<>
+			<Helmet>
+				<title>Register</title>
+				<meta
+					name="description"
+					content="Create a Fresh Cart account today to enjoy faster checkout, exclusive offers, and personalized recommendations. Register now!"
 				/>
-				{formik.errors.name && formik.touched.name && (
-					<div className="alert alert-danger p-2 mt-2">
-						{formik.errors.name}
-					</div>
-				)}
+			</Helmet>
+			<div className="w-75 mx-auto py-4 px-2">
+				<h2>Register Now</h2>
+				<form onSubmit={formik.handleSubmit}>
+					<label htmlFor="name">Name: </label>
+					<input
+						className="form-control mb-2"
+						type="text"
+						name="name"
+						id="name"
+						value={formik.values.name}
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+					/>
+					{formik.errors.name && formik.touched.name && (
+						<div className="alert alert-danger p-2 mt-2">
+							{formik.errors.name}
+						</div>
+					)}
 
-				<label htmlFor="phone">Phone: </label>
-				<input
-					className="form-control mb-2"
-					type="tel"
-					name="phone"
-					id="phone"
-					value={formik.values.phone}
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-				/>
-				{formik.errors.phone && formik.touched.phone && (
-					<div className="alert alert-danger p-2 mt-2">
-						{formik.errors.phone}
-					</div>
-				)}
+					<label htmlFor="phone">Phone: </label>
+					<input
+						className="form-control mb-2"
+						type="tel"
+						name="phone"
+						id="phone"
+						value={formik.values.phone}
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+					/>
+					{formik.errors.phone && formik.touched.phone && (
+						<div className="alert alert-danger p-2 mt-2">
+							{formik.errors.phone}
+						</div>
+					)}
 
-				<label htmlFor="email">Email: </label>
-				<input
-					className="form-control mb-2"
-					type="email"
-					name="email"
-					id="email"
-					value={formik.values.email}
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-				/>
-				{formik.errors.email && formik.touched.email && (
-					<div className="alert alert-danger p-2 mt-2">
-						{formik.errors.email}
-					</div>
-				)}
+					<label htmlFor="email">Email: </label>
+					<input
+						className="form-control mb-2"
+						type="email"
+						name="email"
+						id="email"
+						value={formik.values.email}
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+					/>
+					{formik.errors.email && formik.touched.email && (
+						<div className="alert alert-danger p-2 mt-2">
+							{formik.errors.email}
+						</div>
+					)}
 
-				<label htmlFor="password">Password: </label>
-				<input
-					className="form-control mb-2"
-					type="password"
-					name="password"
-					id="password"
-					value={formik.values.password}
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-				/>
-				{formik.errors.password && formik.touched.password && (
-					<div className="alert alert-danger p-2 mt-2">
-						{formik.errors.password}
-					</div>
-				)}
+					<label htmlFor="password">Password: </label>
+					<input
+						className="form-control mb-2"
+						type="password"
+						name="password"
+						id="password"
+						value={formik.values.password}
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+					/>
+					{formik.errors.password && formik.touched.password && (
+						<div className="alert alert-danger p-2 mt-2">
+							{formik.errors.password}
+						</div>
+					)}
 
-				<label htmlFor="repassword">rePassword: </label>
-				<input
-					className="form-control mb-2"
-					type="password"
-					name="rePassword"
-					id="repassword"
-					value={formik.values.rePassword}
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-				/>
-				{formik.errors.rePassword && formik.touched.rePassword && (
-					<div className="alert alert-danger p-2 mt-2">
-						{formik.errors.rePassword}
-					</div>
-				)}
+					<label htmlFor="repassword">rePassword: </label>
+					<input
+						className="form-control mb-2"
+						type="password"
+						name="rePassword"
+						id="repassword"
+						value={formik.values.rePassword}
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+					/>
+					{formik.errors.rePassword && formik.touched.rePassword && (
+						<div className="alert alert-danger p-2 mt-2">
+							{formik.errors.rePassword}
+						</div>
+					)}
 
-				{isLoading ? (
-					<div className="btn btn-success px-4 py-0">
-						<FallingLines
-							color="#fff"
-							width="40"
-							visible={true}
-							ariaLabel="falling-circles-loading"
-						/>
-					</div>
-				) : (
-					<button
-						disabled={!(formik.isValid && formik.dirty)}
-						type="submit"
-						className="btn bg-main text-white"
-					>
-						Register
-					</button>
-				)}
-				{error && (
-					<div className="alert alert-danger mt-3 p-2">Fail, {error}</div>
-				)}
-			</form>
-		</div>
+					{isLoading ? (
+						<div className="btn btn-success px-4 py-0">
+							<FallingLines
+								color="#fff"
+								width="40"
+								visible={true}
+								ariaLabel="falling-circles-loading"
+							/>
+						</div>
+					) : (
+						<button
+							disabled={!(formik.isValid && formik.dirty)}
+							type="submit"
+							className="btn bg-main text-white"
+						>
+							Register
+						</button>
+					)}
+					{error && (
+						<div className="alert alert-danger mt-3 p-2">Fail, {error}</div>
+					)}
+				</form>
+			</div>
+		</>
 	);
 }
