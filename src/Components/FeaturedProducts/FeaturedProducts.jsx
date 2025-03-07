@@ -39,6 +39,12 @@ export default function FeaturedProducts() {
 
 	let { addToCart } = useContext(CartContext);
 
+	async function addProduct(productId) {
+		let response = await addToCart(productId);
+		console.log(response);
+		
+	}
+
 	return (
 		<>
 			{isLoading ? (
@@ -75,7 +81,8 @@ export default function FeaturedProducts() {
 										title="Add To Cart"
 										onClick={(e) => {
 											e.stopPropagation(); e.preventDefault();
-											addToCart(1);
+											addProduct(product._id);
+											
 										}}
 									>
 										<i className="fa-solid fa-cart-plus"></i>

@@ -20,7 +20,6 @@ export default function CategoriesSlider() {
 
 	let { data } = useQuery("getAllCategoriesImages", getAllCategoriesImages);
 	let categories = data?.data.data;
-	console.log(categories);
 
 	return (
 		<>
