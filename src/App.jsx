@@ -38,6 +38,7 @@ function App() {
 					<RouterProvider router={routers}></RouterProvider>
 				</CartContextProvider>
 			</UserContextProvider>
+			
 		</QueryClientProvider>
 	);
 }

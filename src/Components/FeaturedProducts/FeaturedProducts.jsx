@@ -5,6 +5,7 @@ import { Grid } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { CartContext } from "../../Context/CartContext";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 
 export default function FeaturedProducts() {
 	// const [products, setProducts] = useState([]);
@@ -41,8 +42,23 @@ export default function FeaturedProducts() {
 
 	async function addProduct(productId) {
 		let response = await addToCart(productId);
-		console.log(response);
-		
+		if (response.data.status === "success") {
+			toast.success(`${response.data.message}`, {
+				position: "bottom-right",
+				autoClose: 5000,
+				pauseOnHover: true,
+				draggable: true,
+				transition: Bounce,
+			});
+		} else {
+			toast.error(`${response.data.message}`, {
+				position: "bottom-right",
+				autoClose: 5000,
+				pauseOnHover: true,
+				draggable: true,
+				transition: Bounce,
+			});
+		}
 	}
 
 	return (
@@ -61,7 +77,10 @@ export default function FeaturedProducts() {
 					/>
 				</div>
 			) : (
-				<div className="row justify-content-between align-items-center mx-auto staggered-animation" style={{ '--i': 4 }}>
+				<div
+					className="row justify-content-between align-items-center mx-auto staggered-animation"
+					style={{ "--i": 4 }}
+				>
 					{data?.data.data.map((product, index) => {
 						return (
 							<Link
@@ -80,18 +99,16 @@ export default function FeaturedProducts() {
 										className={`${Style.addToCart} d-flex justify-content-between align-items-center bg-main`}
 										title="Add To Cart"
 										onClick={(e) => {
-											e.stopPropagation(); e.preventDefault();
+											e.stopPropagation();
+											e.preventDefault();
 											addProduct(product._id);
-											
 										}}
 									>
 										<i className="fa-solid fa-cart-plus"></i>
 									</button>
 								</div>
 								<div className="card-body pb-0">
-									<h6
-										className="mb-0 card-text font-sm fw-medium text-main"
-									>
+									<h6 className="mb-0 card-text font-sm fw-medium text-main">
 										{product.category.name}
 									</h6>
 									<h4 className="card-title h5 fw-bold" title={product.title}>
@@ -102,14 +119,13 @@ export default function FeaturedProducts() {
 									<p className="fw-light m-0">{product.price} EGP</p>
 									<span>
 										{product.ratingsAverage}{" "}
-										<i
-											className="fa-solid fa-star rating-color"
-										></i>
+										<i className="fa-solid fa-star rating-color"></i>
 									</span>
 								</div>
 							</Link>
 						);
 					})}
+					<ToastContainer />
 				</div>
 			)}
 		</>

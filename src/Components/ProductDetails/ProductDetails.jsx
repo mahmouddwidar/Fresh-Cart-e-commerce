@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../../Context/CartContext";
 import { Helmet } from "react-helmet";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 
 export default function ProductDetails() {
 	let params = useParams();
@@ -21,7 +22,23 @@ export default function ProductDetails() {
 
 	async function addProduct(productId) {
 		let response = await addToCart(productId);
-		console.log(response);
+		if (response.data.status === "success") {
+			toast.success(`${response.data.message}`, {
+				position: "bottom-right",
+				autoClose: 5000,
+				pauseOnHover: true,
+				draggable: true,
+				transition: Bounce,
+			});
+		} else {
+			toast.error(`${response.data.message}`, {
+				position: "bottom-right",
+				autoClose: 5000,
+				pauseOnHover: true,
+				draggable: true,
+				transition: Bounce,
+			});
+		}
 	}
 
 	return (
@@ -62,6 +79,7 @@ export default function ProductDetails() {
 							</button>
 						</div>
 					</div>
+					<ToastContainer />
 				</>
 			) : (
 				""
