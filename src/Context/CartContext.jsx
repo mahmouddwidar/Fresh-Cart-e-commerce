@@ -1,11 +1,10 @@
 import axios from "axios";
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import { useQuery } from "react-query";
 
 export const CartContext = createContext();
 
 export default function CartContextProvider(props) {
-	const [cartCount, setCartCount] = useState(0);
 	const headers = {
 		token: localStorage.getItem("userToken"),
 	};
@@ -25,8 +24,17 @@ export default function CartContextProvider(props) {
 			.catch((err) => err);
 	}
 
+	function getLoggedUserCart() {
+		return axios
+			.get("https://ecommerce.routemisr.com/api/v1/cart", {
+				headers: headers,
+			})
+			.then((response) => response)
+			.catch((error) => error);
+	}
+
 	return (
-		<CartContext.Provider value={{ cartCount, addToCart }}>
+		<CartContext.Provider value={{ addToCart, getLoggedUserCart }}>
 			{props.children}
 		</CartContext.Provider>
 	);

@@ -130,3 +130,28 @@ a:hover {
 @keyframes grow {
   to {width: 100%;}
 }
+
+.cart-btn {
+  border: 1px solid var(--main-color) !important;
+  color: var(--main-color) !important;
+  transition: all linear var(--transition-speed);
+  &:hover {
+    background-color: var(--main-color) !important;
+    color: #FFF !important;
+  }
+}
+
+.cart-nav {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  font-size: 13px;
+  border-radius: 50%;
+  background: #0aad0ad2;
+  color: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

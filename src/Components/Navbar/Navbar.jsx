@@ -2,19 +2,17 @@ import Style from "./Navbar.module.css";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/imgs/freshcart-logo.svg";
 import { useContext } from "react";
-import { CartContext } from "../../Context/CartContext";
 import { UserContext } from "../../Context/UserContext";
 
 export default function Navbar() {
-	let { cartCount } = useContext(CartContext);
 	let { userToken, setUserToken } = useContext(UserContext);
 	let navigate = useNavigate();
 
 	function logOut() {
-        localStorage.removeItem('userToken');
-        setUserToken(null);
-		navigate('/login');
-    }
+		localStorage.removeItem("userToken");
+		setUserToken(null);
+		navigate("/login");
+	}
 
 	return (
 		<nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -48,10 +46,10 @@ export default function Navbar() {
 								</NavLink>
 							</li>
 							<li className="nav-item">
-								<NavLink className="nav-link" to="/cart">
-									Cart{" "}
-									<span className="bg-success text-white p-1 rounded-1">
-										{cartCount}
+								<NavLink className="nav-link position-relative" to="/cart">
+									<i className="fa-solid fa-cart-shopping"></i>{" "}
+									<span className="cart-nav">
+										5
 									</span>
 								</NavLink>
 							</li>
@@ -70,7 +68,14 @@ export default function Navbar() {
 						</li>
 						{userToken !== null ? (
 							<li className="nav-item">
-								<button className="nav-link" onClick={()=>{logOut()}}>Log out</button>
+								<button
+									className="nav-link"
+									onClick={() => {
+										logOut();
+									}}
+								>
+									Log out
+								</button>
 							</li>
 						) : (
 							<>
