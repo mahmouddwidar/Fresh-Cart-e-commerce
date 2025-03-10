@@ -3,10 +3,12 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/imgs/freshcart-logo.svg";
 import { useContext } from "react";
 import { UserContext } from "../../Context/UserContext";
+import { CartContext } from "../../Context/CartContext";
 
 export default function Navbar() {
 	let { userToken, setUserToken } = useContext(UserContext);
 	let navigate = useNavigate();
+	let { numOfCartItems } = useContext(CartContext);
 
 	function logOut() {
 		localStorage.removeItem("userToken");
@@ -48,9 +50,11 @@ export default function Navbar() {
 							<li className="nav-item">
 								<NavLink className="nav-link position-relative" to="/cart">
 									<i className="fa-solid fa-cart-shopping"></i>{" "}
-									<span className="cart-nav">
-										5
-									</span>
+									{numOfCartItems > 0 ? (
+										<span className="cart-nav">{numOfCartItems}</span>
+									) : (
+										""
+									)}
 								</NavLink>
 							</li>
 						</ul>

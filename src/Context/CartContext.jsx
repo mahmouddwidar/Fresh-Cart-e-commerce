@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import { useQuery } from "react-query";
 
 export const CartContext = createContext();
@@ -8,6 +8,8 @@ export default function CartContextProvider(props) {
 	const headers = {
 		token: localStorage.getItem("userToken"),
 	};
+
+	const [numOfCartItems, setNumOfCartItems] = useState(0);
 
 	function addToCart(productId) {
 		return axios
@@ -20,7 +22,10 @@ export default function CartContextProvider(props) {
 					headers,
 				}
 			)
-			.then((response) => response)
+			.then((response) => {
+				setNumOfCartItems(response.data.numOfCartItems);
+				return response;
+			})
 			.catch((err) => err);
 	}
 
@@ -29,16 +34,28 @@ export default function CartContextProvider(props) {
 			.get("https://ecommerce.routemisr.com/api/v1/cart", {
 				headers: headers,
 			})
-			.then((response) => response)
+			.then((response) => {
+				setNumOfCartItems(response.data.numOfCartItems);
+				return response;
+			})
 			.catch((error) => error);
 	}
+
+	// function updateNumOfCartItems() {
+	// 	getLoggedUserCart().then((response) => {
+	// 		setNumOfCartItems(response.data.numOfCartItems);
+	// 	});
+	// }
 
 	function removeCartItem(productId) {
 		return axios
 			.delete(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`, {
 				headers,
 			})
-			.then((response) => response)
+			.then((response) => {
+				setNumOfCartItems(response.data.numOfCartItems);
+				return response;
+			})
 			.catch((error) => error);
 	}
 
@@ -56,13 +73,23 @@ export default function CartContextProvider(props) {
 	function clearCart() {
 		return axios
 			.delete(`https://ecommerce.routemisr.com/api/v1/cart`, { headers })
-			.then((response) => response)
+			.then((response) => {
+				setNumOfCartItems(response.data.numOfCartItems);
+				return response;
+			})
 			.catch((error) => error);
 	}
 
 	return (
 		<CartContext.Provider
-			value={{ addToCart, getLoggedUserCart, removeCartItem, updateProductQuantity, clearCart,}}
+			value={{
+				addToCart,
+				getLoggedUserCart,
+				removeCartItem,
+				updateProductQuantity,
+				clearCart,
+				numOfCartItems,
+			}}
 		>
 			{props.children}
 		</CartContext.Provider>
