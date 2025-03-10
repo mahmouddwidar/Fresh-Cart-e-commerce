@@ -33,8 +33,37 @@ export default function CartContextProvider(props) {
 			.catch((error) => error);
 	}
 
+	function removeCartItem(productId) {
+		return axios
+			.delete(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`, {
+				headers,
+			})
+			.then((response) => response)
+			.catch((error) => error);
+	}
+
+	function updateProductQuantity(productId, count) {
+		return axios
+			.put(
+				`https://ecommerce.routemisr.com/api/v1/cart/${productId}`,
+				{ count },
+				{ headers }
+			)
+			.then((response) => response)
+			.catch((err) => err);
+	}
+
+	function clearCart() {
+		return axios
+			.delete(`https://ecommerce.routemisr.com/api/v1/cart`, { headers })
+			.then((response) => response)
+			.catch((error) => error);
+	}
+
 	return (
-		<CartContext.Provider value={{ addToCart, getLoggedUserCart }}>
+		<CartContext.Provider
+			value={{ addToCart, getLoggedUserCart, removeCartItem, updateProductQuantity, clearCart,}}
+		>
 			{props.children}
 		</CartContext.Provider>
 	);

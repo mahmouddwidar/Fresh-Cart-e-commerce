@@ -83,7 +83,7 @@ a:hover {
 }
 
 .text-main {
-  color: var(--main-color);
+  color: var(--main-color) !important;
 }
 
 .bg-main {
