@@ -6,9 +6,10 @@ import { UserContext } from "../../Context/UserContext";
 import { CartContext } from "../../Context/CartContext";
 
 export default function Navbar() {
-	let { userToken, setUserToken } = useContext(UserContext);
+	let { userToken, setUserToken, userData } = useContext(UserContext);
 	let navigate = useNavigate();
 	let { numOfCartItems } = useContext(CartContext);
+
 
 	function logOut() {
 		localStorage.removeItem("userToken");
@@ -71,16 +72,46 @@ export default function Navbar() {
 							<i className="fab fa-instagram me-3"></i>
 						</li>
 						{userToken !== null ? (
-							<li className="nav-item">
-								<button
-									className="nav-link"
-									onClick={() => {
-										logOut();
-									}}
-								>
-									Log out
-								</button>
-							</li>
+							<>
+								<li className="nav-item dropdown">
+									<a
+										className="nav-link dropdown-toggle"
+										href="#"
+										role="button"
+										data-bs-toggle="dropdown"
+										aria-expanded="false"
+									>
+										Ahlan {userData.name}
+									</a>
+									<ul className="dropdown-menu">
+										<li>
+											<Link className="dropdown-item bg-white" to={`/profile`}>
+												Profile
+											</Link>
+										</li>
+										<li>
+											<Link className="dropdown-item bg-white mt-2" to={`/profile/addresses`}>
+												Addresses
+											</Link>
+										</li>
+										<li>
+											<Link className="dropdown-item bg-white mt-2" to={`/profile/orders`}>
+												Orders
+											</Link>
+										</li>
+									</ul>
+								</li>
+								<li className="nav-item">
+									<button
+										className="nav-link"
+										onClick={() => {
+											logOut();
+										}}
+									>
+										Log out
+									</button>
+								</li>
+							</>
 						) : (
 							<>
 								<li className="nav-item">

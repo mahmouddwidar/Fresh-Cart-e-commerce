@@ -10,7 +10,12 @@ import CartContextProvider from "./Context/CartContext";
 import UserContextProvider from "./Context/UserContext";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
+import ProfileLayout from "./Components/ProfileLayout/ProfileLayout";
+import Profile from "./Components/Profile/Profile";
+import Addresses from "./Components/Addresses/Addresses";
+import Orders from "./Components/Orders/Orders";
 import { QueryClient, QueryClientProvider } from "react-query";
+
 
 function App() {
 	let routers = createBrowserRouter([
@@ -24,6 +29,11 @@ function App() {
 				{ path: "products", element: <ProtectedRoute><Products /></ProtectedRoute> },
 				{ path: "product/:id", element: <ProtectedRoute><ProductDetails /></ProtectedRoute> },
 				{ path: "cart", element: <ProtectedRoute><Cart /></ProtectedRoute> },
+				{ path: "profile", element: <ProtectedRoute><ProfileLayout /></ProtectedRoute>, children: [
+					{index: true, element: <ProtectedRoute><Profile /></ProtectedRoute>},
+					{path: 'addresses', element: <ProtectedRoute><Addresses /></ProtectedRoute>},
+					{path: 'orders', element: <ProtectedRoute><Orders /></ProtectedRoute>},
+				] },
 				{ path: "*", element: <NotFound /> },
 			],
 		},

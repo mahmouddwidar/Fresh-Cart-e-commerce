@@ -11,7 +11,7 @@ export default function Login() {
 	let navigate = useNavigate();
 	const [error, setError] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
-	const { setUserToken } = useContext(UserContext);
+	const { setUserToken, setUserData } = useContext(UserContext);
 
 	const validationSchema = Yup.object({
 		email: Yup.string()
@@ -31,10 +31,10 @@ export default function Login() {
 			password: "",
 		},
 		validationSchema,
-		onSubmit: registerSubmit,
+		onSubmit: LoginSubmit,
 	});
 
-	async function registerSubmit(values) {
+	async function LoginSubmit(values) {
 		setError(null);
 		setIsLoading(true);
 
@@ -45,6 +45,8 @@ export default function Login() {
 					setIsLoading(false);
 					localStorage.setItem("userToken", response.data.token);
 					setUserToken(response.data.token);
+					localStorage.setItem('userData', JSON.stringify(response.data.user))
+					setUserData(response.data.user);
 					navigate("/");
 				}
 			})
