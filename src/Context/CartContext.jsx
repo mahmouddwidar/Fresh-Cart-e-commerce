@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
 export const CartContext = createContext();
@@ -10,6 +10,10 @@ export default function CartContextProvider(props) {
 	};
 
 	const [numOfCartItems, setNumOfCartItems] = useState(0);
+
+	useEffect(() => {
+		getLoggedUserCart();
+	}, []);
 
 	function addToCart(productId) {
 		return axios
@@ -41,12 +45,6 @@ export default function CartContextProvider(props) {
 			.catch((error) => error);
 	}
 
-	// function updateNumOfCartItems() {
-	// 	getLoggedUserCart().then((response) => {
-	// 		setNumOfCartItems(response.data.numOfCartItems);
-	// 	});
-	// }
-
 	function removeCartItem(productId) {
 		return axios
 			.delete(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`, {
@@ -66,7 +64,10 @@ export default function CartContextProvider(props) {
 				{ count },
 				{ headers }
 			)
-			.then((response) => response)
+			.then((response) => {
+				setNumOfCartItems(response.data.numOfCartItems);
+				return response;
+			})
 			.catch((err) => err);
 	}
 

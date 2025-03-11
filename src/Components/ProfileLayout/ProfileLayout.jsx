@@ -1,21 +1,49 @@
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import Style from "./ProfileLayout.module.css";
 
 export default function ProfileLayout() {
 	return (
-		<div className="d-flex justify-content-between align-content-center">
-			<nav>
-				<ul>
-					<Link to={`/profile`}>Profile</Link>
-				</ul>
-				<ul>
-					<Link to={`/profile/addresses`}>Addresses</Link>
-				</ul>
-				<ul>
-					<Link to={`/profile/orders`}>Orders</Link>
-				</ul>
+		<div className="d-flex">
+			{/* Sidebar Navigation */}
+			<nav className={`${Style["side-navbar"]} staggered-animation`} style={{ '--i': 1 }}>
+				<NavLink
+					to="/profile"
+					end
+					className={({ isActive }) =>
+						`staggered-animation ${Style["nav-item"]} ${isActive ? Style["active"] : ""}`
+					}
+					style={{ '--i': 2 }}
+				>
+					<span className={`${Style['icon']}`} >👤</span> Profile
+				</NavLink>
+
+				<NavLink
+					to="/profile/addresses"
+					end
+					className={({ isActive }) =>
+						`staggered-animation ${Style["nav-item"]} ${isActive ? Style["active"] : ""}`
+					}
+					style={{ '--i': 3 }}
+				>
+					<span className={`${Style['icon']}`} >🏠</span> Addresses
+				</NavLink>
+
+				<NavLink
+					to="/profile/orders"
+					end
+					className={({ isActive }) =>
+						`staggered-animation ${Style["nav-item"]} ${isActive ? Style["active"] : ""}`
+					}
+					style={{ '--i': 4 }}
+				>
+					<span className={`${Style['icon']}`} >📦</span> Orders
+				</NavLink>
 			</nav>
-			<Outlet />
+
+			{/* Main Content */}
+			<div className="p-4 staggered-animation" style={{ '--i': 5 }}>
+				<Outlet />
+			</div>
 		</div>
 	);
 }

@@ -1,1 +1,41 @@
-.Profile {}
+.profileCard {
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.infoItem {
+    background: var(--light-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.infoLabel {
+    color: var(--text-color);
+    font-weight: 600;
+    margin-right: 200px;
+}
+
+.infoValue {
+    color: #6c757d;
+}
+
+@media (max-width: 768px) {
+    .profileContent {
+        padding: 20px;
+    }
+
+    .infoLabel {
+        margin-right: 50px;
+    }
+}

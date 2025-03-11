@@ -10,7 +10,6 @@ export default function Navbar() {
 	let navigate = useNavigate();
 	let { numOfCartItems } = useContext(CartContext);
 
-
 	function logOut() {
 		localStorage.removeItem("userToken");
 		setUserToken(null);
@@ -74,30 +73,53 @@ export default function Navbar() {
 						{userToken !== null ? (
 							<>
 								<li className="nav-item dropdown">
-									<a
-										className="nav-link dropdown-toggle"
-										href="#"
+									<p
+										className="nav-link dropdown-toggle pb-0 mb-0"
 										role="button"
 										data-bs-toggle="dropdown"
 										aria-expanded="false"
 									>
-										Ahlan {userData.name}
-									</a>
+										Ahlan {userData.name}!
+									</p>
+									{/** Drop Down Menu */}
 									<ul className="dropdown-menu">
 										<li>
-											<Link className="dropdown-item bg-white" to={`/profile`}>
-												Profile
-											</Link>
+											<NavLink
+												to="/profile"
+												end
+												className={({ isActive }) =>
+													`dropdown-item drop-menu ${
+														isActive ? "drop-menu-active" : "bg-white"
+													}`
+												}
+											>
+												<i className="fa-regular fa-user me-2"></i> Profile
+											</NavLink>
 										</li>
 										<li>
-											<Link className="dropdown-item bg-white mt-2" to={`/profile/addresses`}>
+											<NavLink
+												to="/profile/addresses"
+												className={({ isActive }) =>
+													`dropdown-item drop-menu ${
+														isActive ? "drop-menu-active" : "bg-white"
+													}`
+												}
+											>
+												<i className="fa-solid fa-location-dot me-2"></i>{" "}
 												Addresses
-											</Link>
+											</NavLink>
 										</li>
 										<li>
-											<Link className="dropdown-item bg-white mt-2" to={`/profile/orders`}>
-												Orders
-											</Link>
+											<NavLink
+												to="/profile/orders"
+												className={({ isActive }) =>
+													`dropdown-item drop-menu ${
+														isActive ? "drop-menu-active" : "bg-white"
+													}`
+												}
+											>
+												<i className="fa-solid fa-list-check me-2"></i> Orders
+											</NavLink>
 										</li>
 									</ul>
 								</li>

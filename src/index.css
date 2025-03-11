@@ -155,3 +155,16 @@ a:hover {
   justify-content: center;
   align-items: center;
 }
+
+.drop-menu {
+  transition: all linear var(--transition-speed);
+  &:hover {
+    background: var(--main-color) !important;
+    color: #FFF !important;
+  }
+}
+
+.drop-menu-active {
+  background: var(--main-color) !important;
+  color: #FFF !important;
+}
