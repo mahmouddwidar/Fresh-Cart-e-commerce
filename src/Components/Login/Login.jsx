@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { UserContext } from "../../Context/UserContext";
 import { Helmet } from "react-helmet";
+import { jwtDecode } from "jwt-decode";
 
 export default function Login() {
 	let navigate = useNavigate();
@@ -45,6 +46,7 @@ export default function Login() {
 					setIsLoading(false);
 					localStorage.setItem("userToken", response.data.token);
 					setUserToken(response.data.token);
+					response.data.user['id'] = jwtDecode(response.data.token)['id'];
 					localStorage.setItem('userData', JSON.stringify(response.data.user))
 					setUserData(response.data.user);
 					navigate("/");

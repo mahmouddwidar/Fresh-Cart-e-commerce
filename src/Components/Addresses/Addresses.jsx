@@ -6,7 +6,7 @@ import Style from "./Addresses.module.css";
 import axios from "axios";
 import { UserContext } from "../../Context/UserContext";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { Bars } from "react-loader-spinner";
+import { MutatingDots } from "react-loader-spinner";
 
 export default function Addresses() {
 	let { userToken } = useContext(UserContext);
@@ -219,14 +219,16 @@ export default function Addresses() {
 			{!showAddForm && (
 				<div className="mt-4">
 					{isLoading ? (
-						<Bars
-							height="30"
-							width="40"
-							color="#FFF"
-							ariaLabel="bars-loading"
+						<MutatingDots
+							visible={true}
+							height="100"
+							width="100"
+							color="#4fa94d"
+							secondaryColor="#4fa94d"
+							radius="12.5"
+							ariaLabel="mutating-dots-loading"
 							wrapperStyle={{}}
 							wrapperClass=""
-							visible={true}
 						/>
 					) : isError ? (
 						<div className="alert alert-danger">Error loading addresses.</div>
