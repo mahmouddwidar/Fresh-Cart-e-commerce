@@ -8,7 +8,7 @@ export default function Profile() {
 	return (
 		<>
 			<h1>Profile</h1>
-			<div className={Style.profileCard}>
+			<div className={`${Style.profileCard} ms-0`}>
 				<div className={Style.profileInfo}>
 					<div className={Style.infoItem}>
 						<span className={Style.infoLabel}>Name</span>

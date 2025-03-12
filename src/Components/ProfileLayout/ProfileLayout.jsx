@@ -41,7 +41,7 @@ export default function ProfileLayout() {
 			</nav>
 
 			{/* Main Content */}
-			<div className="p-4 staggered-animation" style={{ '--i': 5 }}>
+			<div className="flex-grow-1 p-4 staggered-animation" style={{ '--i': 5 }}>
 				<Outlet />
 			</div>
 		</div>

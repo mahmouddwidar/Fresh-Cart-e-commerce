@@ -74,7 +74,7 @@ export default function Navbar() {
 							<>
 								<li className="nav-item dropdown">
 									<p
-										className="nav-link dropdown-toggle pb-0 mb-0"
+										className="nav-link dropdown-toggle border-end mb-0"
 										role="button"
 										data-bs-toggle="dropdown"
 										aria-expanded="false"
