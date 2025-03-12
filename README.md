@@ -1,4 +1,4 @@
-<img src="https://github.com/user-attachments/assets/4db43041-883c-4e18-a985-84be133afcc8" align="left" height="225px" hspace="0px" vspace="20px">
+<img src="https://github.com/user-attachments/assets/4db43041-883c-4e18-a985-84be133afcc8" align="left" height="70px" hspace="0px" vspace="20px">
 
 # Fresh Cart Project
 
@@ -67,4 +67,12 @@ This project is an e-commerce platform designed to provide a seamless shopping e
 
 1. Clone the repository
    ```bash
-   git clone [your-repository-url]
+   git clone https://github.com/mahmouddwidar/Fresh-Cart-e-commerce.git
+
+2. Install the dependencies
+   ```bash
+   npm install
+
+3. Start the development server
+   ```bash
+   npm run dev
