@@ -1,1 +1,11 @@
-.ProductDetails {}
+.wishlist-button {
+    border: 1px solid var(--light-color) !important;
+    color: var(--favorite-color);
+    transition: all linear(--transition-speed);
+    &:hover {
+        background-color: var(--favorite-color);
+        & i {
+            color: #FFF;
+        }
+    }
+}

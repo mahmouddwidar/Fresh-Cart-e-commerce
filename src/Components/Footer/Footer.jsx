@@ -1,7 +1,6 @@
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import Style from "./Footer.module.css";
 import amazonPay from "../../assets/footer/Amazon_Pay_logo.png";
 import masterCard from "../../assets/footer/MasterCard-Logo.png";
 import paypal from "../../assets/footer/PayPal.png";
@@ -43,7 +42,7 @@ export default function Footer() {
 						onBlur={formik.handleBlur}
 						className="w-75 form-control"
 					/>
-					<button type="submit" className="btn btn-success me-4">
+					<button type="submit" className="btn bg-main text-white me-4">
 						Share App Link
 					</button>
 				</form>

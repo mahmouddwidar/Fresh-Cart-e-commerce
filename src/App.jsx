@@ -15,7 +15,8 @@ import Profile from "./Components/Profile/Profile";
 import Addresses from "./Components/Addresses/Addresses";
 import Orders from "./Components/Orders/Orders";
 import { QueryClient, QueryClientProvider } from "react-query";
-
+import WishList from "./Components/WishList/WishList";
+import WishListContextProvider from "./Context/WishListContext";
 
 function App() {
 	let routers = createBrowserRouter([
@@ -23,17 +24,82 @@ function App() {
 			path: "/",
 			element: <Layout />,
 			children: [
-				{ index: true, element: <ProtectedRoute><Home /></ProtectedRoute> },
+				{
+					index: true,
+					element: (
+						<ProtectedRoute>
+							<Home />
+						</ProtectedRoute>
+					),
+				},
 				{ path: "register", element: <Register /> },
 				{ path: "login", element: <Login /> },
-				{ path: "products", element: <ProtectedRoute><Products /></ProtectedRoute> },
-				{ path: "product/:id", element: <ProtectedRoute><ProductDetails /></ProtectedRoute> },
-				{ path: "cart", element: <ProtectedRoute><Cart /></ProtectedRoute> },
-				{ path: "profile", element: <ProtectedRoute><ProfileLayout /></ProtectedRoute>, children: [
-					{index: true, element: <ProtectedRoute><Profile /></ProtectedRoute>},
-					{path: 'addresses', element: <ProtectedRoute><Addresses /></ProtectedRoute>},
-					{path: 'orders', element: <ProtectedRoute><Orders /></ProtectedRoute>},
-				] },
+				{
+					path: "products",
+					element: (
+						<ProtectedRoute>
+							<Products />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "product/:id",
+					element: (
+						<ProtectedRoute>
+							<ProductDetails />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "cart",
+					element: (
+						<ProtectedRoute>
+							<Cart />
+						</ProtectedRoute>
+					),
+				},
+				{
+					path: "profile",
+					element: (
+						<ProtectedRoute>
+							<ProfileLayout />
+						</ProtectedRoute>
+					),
+					children: [
+						{
+							index: true,
+							element: (
+								<ProtectedRoute>
+									<Profile />
+								</ProtectedRoute>
+							),
+						},
+						{
+							path: "addresses",
+							element: (
+								<ProtectedRoute>
+									<Addresses />
+								</ProtectedRoute>
+							),
+						},
+						{
+							path: "orders",
+							element: (
+								<ProtectedRoute>
+									<Orders />
+								</ProtectedRoute>
+							),
+						},
+						{
+							path: "wishlist",
+							element: (
+								<ProtectedRoute>
+									<WishList />
+								</ProtectedRoute>
+							),
+						},
+					],
+				},
 				{ path: "*", element: <NotFound /> },
 			],
 		},
@@ -45,10 +111,11 @@ function App() {
 		<QueryClientProvider client={queryClient}>
 			<UserContextProvider>
 				<CartContextProvider>
-					<RouterProvider router={routers}></RouterProvider>
+					<WishListContextProvider>
+						<RouterProvider router={routers}></RouterProvider>
+					</WishListContextProvider>
 				</CartContextProvider>
 			</UserContextProvider>
-			
 		</QueryClientProvider>
 	);
 }

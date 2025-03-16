@@ -121,6 +121,18 @@ export default function Navbar() {
 												<i className="fa-solid fa-list-check me-2"></i> Orders
 											</NavLink>
 										</li>
+										<li>
+											<NavLink
+												to="/profile/wishlist"
+												className={({ isActive }) =>
+													`dropdown-item drop-menu ${
+														isActive ? "drop-menu-active" : "bg-white"
+													}`
+												}
+											>
+												<i className="fa-solid fa-heart me-2"></i> Wish List
+											</NavLink>
+										</li>
 									</ul>
 								</li>
 								<li className="nav-item">

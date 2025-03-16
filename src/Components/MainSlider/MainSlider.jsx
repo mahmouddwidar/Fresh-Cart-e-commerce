@@ -33,8 +33,12 @@ export default function MainSlider() {
 					</Slider>
 				</div>
 				<div className="col-md-2">
-					<img className={`${Style.banner}`} src={banner1} alt="Banner" />
-					<img className={`${Style.banner}`} src={banner2} alt="Banner" />
+					<div className={Style["banner-img-container"]} style={{ '--banner-text': "'Fresh'" }}>
+						<img className={`${Style.banner}`} src={banner1} alt="Banner" />
+					</div>
+					<div className={Style["banner-img-container"]} style={{ '--banner-text': "'Cart'" }}>
+						<img className={`${Style.banner}`} src={banner2} alt="Banner" />
+					</div>
 				</div>
 			</div>
 		</>
