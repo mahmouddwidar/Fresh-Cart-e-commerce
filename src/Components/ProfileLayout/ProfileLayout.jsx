@@ -5,7 +5,7 @@ export default function ProfileLayout() {
 	return (
 		<div className="d-flex">
 			{/* Sidebar Navigation */}
-			<nav className={`${Style["side-navbar"]} staggered-animation`} style={{ '--i': 1 }}>
+			<nav className={`${Style["side-navbar"]} col-md-2 staggered-animation`} style={{ '--i': 1 }}>
 				<NavLink
 					to="/profile"
 					end
@@ -37,6 +37,16 @@ export default function ProfileLayout() {
 					style={{ '--i': 4 }}
 				>
 					<span className={`${Style['icon']}`} >📦</span> Orders
+				</NavLink>
+				<NavLink
+					to="/profile/wishlist"
+					end
+					className={({ isActive }) =>
+						`staggered-animation ${Style["nav-item"]} ${isActive ? Style["active"] : ""}`
+					}
+					style={{ '--i': 5 }}
+				>
+					<i className="fa-solid fa-heart" style={{ color: "#dc3545" }}></i> Whish List
 				</NavLink>
 			</nav>
 

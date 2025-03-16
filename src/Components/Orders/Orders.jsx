@@ -20,7 +20,6 @@ export default function Orders() {
 		getUserOrders(userData["id"])
 	);
 	let allOrders = data?.data;
-	console.log(allOrders);
 
 	return (
 		<>

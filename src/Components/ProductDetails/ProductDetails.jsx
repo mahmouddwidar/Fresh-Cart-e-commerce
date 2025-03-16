@@ -6,10 +6,12 @@ import { useContext } from "react";
 import { CartContext } from "../../Context/CartContext";
 import { Helmet } from "react-helmet";
 import { Bounce, toast, ToastContainer } from "react-toastify";
+import WishListButton from "../WishListButton/WishListButton";
 
 export default function ProductDetails() {
 	let params = useParams();
-	let { addToCart, getLoggedUserCart } = useContext(CartContext);
+	let { addToCart } = useContext(CartContext);
+	
 
 	function getProductDetails(id) {
 		return axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`);
@@ -40,7 +42,7 @@ export default function ProductDetails() {
 			});
 		}
 	}
-
+	
 	return (
 		<>
 			{productDetails ? (
@@ -71,12 +73,15 @@ export default function ProductDetails() {
 									<i className="fa-solid fa-star rating-color ms-2"></i>
 								</span>
 							</div>
-							<button
-								className="btn bg-main text-white w-100 mt-3"
-								onClick={() => addProduct(productDetails._id)}
-							>
-								Add To Cart
-							</button>
+							<div className="d-flex justify-content-between align-items-center mt-3">
+								<button
+									className="btn bg-main text-white w-75"
+									onClick={() => addProduct(productDetails._id)}
+								>
+									Add To Cart
+								</button>
+								<WishListButton productId={productDetails._id} className={Style['wishlist-button']} />
+							</div>
 						</div>
 					</div>
 					<ToastContainer />

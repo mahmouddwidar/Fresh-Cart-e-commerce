@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { CartContext } from "../../Context/CartContext";
 import { Bounce, toast, ToastContainer } from "react-toastify";
+import WishListButton from "../WishListButton/WishListButton";
 
 export default function FeaturedProducts() {
 	// const [products, setProducts] = useState([]);
@@ -95,6 +96,8 @@ export default function FeaturedProducts() {
 										alt={product.title}
 										className="w-100 card-img-top"
 									/>
+									{/* {console.log(product._id)} */}
+									<WishListButton productId={product._id} className={Style['wishlist-button']} />
 									<button
 										className={`${Style.addToCart} d-flex justify-content-between align-items-center bg-main`}
 										title="Add To Cart"
