@@ -20,6 +20,8 @@ export default function Orders() {
 		getUserOrders(userData["id"])
 	);
 	let allOrders = data?.data;
+	console.log(allOrders);
+	
 
 	return (
 		<>
@@ -52,7 +54,7 @@ export default function Orders() {
 				/>
 			) : (
 				<div className="container my-5">
-					{allOrders.data.map((order, index) => {
+					{allOrders.map((order, index) => {
 						return (
 							<>
 								<div
@@ -80,7 +82,7 @@ export default function Orders() {
 								</div>
 								{/* Order Summary */}
 								<div
-									className="card shadow-sm mb-4 staggered-animation"
+									className="card shadow-sm mb-2 staggered-animation"
 									style={{ "--i": index + 1 }}
 								>
 									<div className="card-body">
@@ -110,13 +112,14 @@ export default function Orders() {
 										</div>
 									</div>
 								</div>
+								{/* Shipping Address */}
 								<div
 									className="card shadow-sm mb-4 staggered-animation"
 									style={{ "--i": index + 1 }}
 								>
 									<div className="card-body">
 										<h5 className="card-title text-main">Shipping Address</h5>
-										<p>
+										<p className="mb-1">
 											<strong>Details:</strong> Home Address, Alexadnria
 										</p>
 										<p>
@@ -124,6 +127,7 @@ export default function Orders() {
 										</p>
 									</div>
 								</div>
+								<hr />
 							</>
 						);
 					})}

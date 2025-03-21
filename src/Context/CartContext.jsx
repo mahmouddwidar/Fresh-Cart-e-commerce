@@ -81,6 +81,17 @@ export default function CartContextProvider(props) {
 			.catch((error) => error);
 	}
 
+	//http://localhost:5173/profile
+	function onlineCheckout(cartId, url, shippingAddress) {
+		return axios
+			.post(
+				`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=${url}`,
+				{ shippingAddress }, // Pass shippingAddress in the request body
+				{ headers } // Include headers in the request configuration
+			)
+			.then((response) => response)
+			.catch((error) => error);
+	}
 	return (
 		<CartContext.Provider
 			value={{
@@ -90,6 +101,7 @@ export default function CartContextProvider(props) {
 				updateProductQuantity,
 				clearCart,
 				numOfCartItems,
+				onlineCheckout,
 			}}
 		>
 			{props.children}

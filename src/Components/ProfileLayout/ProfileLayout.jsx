@@ -29,7 +29,7 @@ export default function ProfileLayout() {
 				</NavLink>
 
 				<NavLink
-					to="/profile/orders"
+					to="/profile/allorders"
 					end
 					className={({ isActive }) =>
 						`staggered-animation ${Style["nav-item"]} ${isActive ? Style["active"] : ""}`

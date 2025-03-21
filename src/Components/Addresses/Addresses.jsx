@@ -7,9 +7,11 @@ import axios from "axios";
 import { UserContext } from "../../Context/UserContext";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { MutatingDots } from "react-loader-spinner";
+import { AddressesContext } from "../../Context/AddressesContext";
 
 export default function Addresses() {
 	let { userToken } = useContext(UserContext);
+	let { getLoggedUserAddresses, removeAddress } = useContext(AddressesContext);
 	const [showAddForm, setShowAddForm] = useState(false);
 	const queryClient = useQueryClient();
 
@@ -69,25 +71,6 @@ export default function Addresses() {
 		return axios.post(
 			`https://ecommerce.routemisr.com/api/v1/addresses`,
 			values,
-			{
-				headers: {
-					token: userToken,
-				},
-			}
-		);
-	}
-
-	function getLoggedUserAddresses() {
-		return axios.get(`https://ecommerce.routemisr.com/api/v1/addresses`, {
-			headers: {
-				token: userToken,
-			},
-		});
-	}
-
-	function removeAddress(addressId) {
-		return axios.delete(
-			`https://ecommerce.routemisr.com/api/v1/addresses/${addressId}`,
 			{
 				headers: {
 					token: userToken,

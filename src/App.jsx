@@ -17,6 +17,7 @@ import Orders from "./Components/Orders/Orders";
 import { QueryClient, QueryClientProvider } from "react-query";
 import WishList from "./Components/WishList/WishList";
 import WishListContextProvider from "./Context/WishListContext";
+import AddressesContextProvider from "./Context/AddressesContext";
 
 function App() {
 	let routers = createBrowserRouter([
@@ -83,7 +84,7 @@ function App() {
 							),
 						},
 						{
-							path: "orders",
+							path: "allorders",
 							element: (
 								<ProtectedRoute>
 									<Orders />
@@ -112,7 +113,9 @@ function App() {
 			<UserContextProvider>
 				<CartContextProvider>
 					<WishListContextProvider>
-						<RouterProvider router={routers}></RouterProvider>
+						<AddressesContextProvider>
+							<RouterProvider router={routers}></RouterProvider>
+						</AddressesContextProvider>
 					</WishListContextProvider>
 				</CartContextProvider>
 			</UserContextProvider>

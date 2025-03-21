@@ -111,7 +111,7 @@ export default function Navbar() {
 										</li>
 										<li>
 											<NavLink
-												to="/profile/orders"
+												to="/profile/allorders"
 												className={({ isActive }) =>
 													`dropdown-item drop-menu ${
 														isActive ? "drop-menu-active" : "bg-white"
