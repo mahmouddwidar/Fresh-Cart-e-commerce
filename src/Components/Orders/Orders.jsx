@@ -90,7 +90,7 @@ export default function Orders() {
 										<div className="row">
 											<div className="col-md-6">
 												<p>
-													<strong>Order Date:</strong> {order.orderDate}
+													<strong>Order Date:</strong> {(new Date(order.paidAt)).toLocaleString()}
 												</p>
 												<p>
 													<strong>Payment Method:</strong>{" "}

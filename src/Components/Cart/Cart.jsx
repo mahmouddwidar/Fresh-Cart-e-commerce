@@ -30,8 +30,8 @@ export default function Cart() {
 			let { data } = await getLoggedUserCart();
 			if (data.status === "success") {
 				setCartItems(data);
-				setCartId(cartItems.cartId);
-				// console.log(cartItems.cartId);
+				setCartId(data.cartId);
+				console.log(data.cartId);
 			} else {
 				console.error("Error happened while getting cart!", data.message);
 			}
@@ -169,8 +169,9 @@ export default function Cart() {
 				"http://localhost:5173/profile",
 				requestBody.shippingAddress
 			);
-
-			if (data.status === "success") {
+			console.log(data?.status);
+			
+			if (data?.status === "success") {
 				window.location.href = data.session.url;
 			} else {
 				toast.error("Failed to create order", {
@@ -382,7 +383,9 @@ export default function Cart() {
 									</div>
 									<div>
 										{formik.touched.address && formik.errors.address ? (
-											<div className="text-danger font-sm">{formik.errors.address}</div>
+											<div className="text-danger font-sm">
+												{formik.errors.address}
+											</div>
 										) : (
 											""
 										)}
