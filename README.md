@@ -13,7 +13,7 @@ This project is an e-commerce platform designed to provide a seamless shopping e
 - Shopping cart with quantity management and removal options
 - User profile with address management
 - Authentication (Login/Register/Logout)
-- Wishlist and order tracking (in progress)
+- Wishlist and order tracking
 
 ## Features
 
@@ -37,13 +37,57 @@ This project is an e-commerce platform designed to provide a seamless shopping e
 ### Profile Page
 - User information (Name, Email)
 - Address management (Add/Edit/Delete addresses)
-- Order history (in progress)
-- Wishlist management (in progress)
+- Order history
+- Wishlist management
 
 ### Authentication
 - Login functionality
 - Registration functionality
 - Logout functionality
+
+## Live Demonstration
+Here are screenshots that show the Fresh Cart E-commerce application in use.
+
+**Sign Up**  
+![Sign Up](https://github.com/user-attachments/assets/ebd048e8-af48-4b65-946c-9ca9892a6f0f "Sign Up")
+
+---
+
+**Login**  
+![Login](https://github.com/user-attachments/assets/9379a8df-253c-4adb-a08e-4c2890dae103 "Login")
+
+---
+
+**Home Page**  
+![Home Page](https://github.com/user-attachments/assets/97d27084-dfd8-4ca9-8514-ecda8029614a "Home Page")
+![Home Page](https://github.com/user-attachments/assets/0b865671-acb1-4229-af58-b4e9b6fd025f "Home Page")
+
+---
+
+**Product Details Page**  
+![Product Details Page](https://github.com/user-attachments/assets/0760b32c-d47d-479b-a873-2958a8b4d2b13 "Product Details Page")
+
+---
+
+**Cart Page**  
+![Cart Page](https://github.com/user-attachments/assets/0a49e81e-67eb-4e65-9bf5-4575251016c6 "Cart Page")
+
+---
+
+**Profile Page**  
+![Profile Page](https://github.com/user-attachments/assets/e0c2704e-5501-4f25-84e8-7b7829bdc404 "Profile Page")
+
+---
+
+**Addresses**  
+![Addresses](https://github.com/user-attachments/assets/87de238e-ee60-4765-a910-30d751146ef5 "Addresses")
+
+---
+
+**Wish List**  
+![Wish List](https://github.com/user-attachments/assets/e0d32340-ec32-4b43-a71e-24900fc47cd2 "Wish List")
+
+---
 
 ## Technologies Used
 
