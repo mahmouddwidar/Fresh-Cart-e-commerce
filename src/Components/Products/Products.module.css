@@ -52,3 +52,11 @@
         color: #FFF;
     }
 }
+
+.pag-active {
+    background-color: var(--main-color) !important;
+    color: white !important;
+    &:hover {
+        background-color: #0d5e0d !important;
+    }
+}

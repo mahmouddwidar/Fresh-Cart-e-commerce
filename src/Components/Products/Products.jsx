@@ -4,17 +4,68 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import WishListButton from "../WishListButton/WishListButton";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../../Context/CartContext";
 import { Bounce, toast, ToastContainer } from "react-toastify";
-import { MutatingDots } from "react-loader-spinner";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export default function Products() {
 	let { addToCart } = useContext(CartContext);
-	const [allProducts, setAllProducts] = useState([]);
+	const [searchQuery, setSearchQuery] = useState("");
+	const [filteredProducts, setFilteredProducts] = useState([]);
+	const [currentPage, setCurrentPage] = useState(1);
 
+	// Formik setup for the sidebar filter form
+	const formik = useFormik({
+		initialValues: {
+			limit: "",
+			priceLte: "",
+			priceGte: "",
+		},
+		validationSchema: Yup.object({
+			limit: Yup.number().positive().integer(),
+			priceLte: Yup.number().positive(),
+			priceGte: Yup.number().positive(),
+		}),
+		onSubmit: (values) => {
+			formik.setValues(values);
+		},
+	});
+
+	const {
+		data: allProducts,
+		isLoading,
+		isError,
+	} = useQuery(
+		["products", formik.values, currentPage],
+		async () => {
+			const queryParams = new URLSearchParams();
+			if (formik.values.limit) queryParams.append("limit", formik.values.limit);
+			if (formik.values.priceLte)
+				queryParams.append("price[lte]", formik.values.priceLte);
+			if (formik.values.priceGte)
+				queryParams.append("price[gte]", formik.values.priceGte);
+			queryParams.append("page", currentPage); // Add current page to query params
+
+			const { data } = await axios.get(
+				`https://ecommerce.routemisr.com/api/v1/products?${queryParams.toString()}`
+			);
+			return data;
+		}
+	);
+
+	// Filter products as the user types
+	useEffect(() => {
+		if (allProducts?.data) {
+			const filtered = allProducts.data.filter((product) =>
+				product.title.toLowerCase().includes(searchQuery.toLowerCase())
+			);
+			setFilteredProducts(filtered);
+		}
+	}, [searchQuery, allProducts]);
+
+	// Add product to cart
 	async function addProduct(productId) {
 		let response = await addToCart(productId);
 		if (response.data.status === "success") {
@@ -36,16 +87,10 @@ export default function Products() {
 		}
 	}
 
-	function getAllProducts() {
-		return axios.get(`https://ecommerce.routemisr.com/api/v1/products`);
-	}
-
-	let { data, isLoading } = useQuery("getAllProducts", getAllProducts);
-	useEffect( ()=> {
-		if (data?.data?.data) {
-			setAllProducts(data.data.data);
-		}
-	}, [data] )
+	// Handle pagination
+	const handlePageChange = (page) => {
+		setCurrentPage(page);
+	};
 
 	return (
 		<>
@@ -58,30 +103,115 @@ export default function Products() {
 			</Helmet>
 			<ToastContainer />
 			<div className="row my-4">
-				<div className="col-md-3 border">sidebar</div>
-				<div className="col-md-9 border">
-					<div className="d-flex justify-content-between align-items-center flex-wrap">
-						{isLoading ? (
-							<div className="d-flex justify-content-center align-items-center w-100">
-								<MutatingDots
-									visible={true}
-									height="80"
-									width="80"
-									color="#4fa94d"
-									ariaLabel="grid-loading"
-									radius="12.5"
-									wrapperStyle={{}}
-									wrapperClass="grid-wrapper"
+				{/* Sidebar */}
+				<div className="col-md-3 p-3">
+					<div className="card shadow-sm p-3">
+						<h4 className="mb-3 d-flex align-items-center">
+							<i className="fas fa-filter me-2"></i>
+							Filters
+						</h4>
+						<form onSubmit={formik.handleSubmit}>
+							{/* Limit */}
+							<div className="mb-3">
+								<label htmlFor="limit" className="form-label">
+									<i className="fas fa-tags me-2"></i>
+									Limit
+								</label>
+								<input
+									type="number"
+									id="limit"
+									name="limit"
+									className="form-control"
+									onChange={formik.handleChange}
+									value={formik.values.limit}
 								/>
 							</div>
-						) : (
-							allProducts.length > 0 ? allProducts.map((product, index) => {
-								return (
+
+							{/* Price (LTE) */}
+							<div className="mb-3">
+								<label htmlFor="priceLte" className="form-label">
+									<i className="fas fa-dollar-sign me-2"></i>
+									Price (Max)
+								</label>
+								<input
+									type="number"
+									id="priceLte"
+									name="priceLte"
+									className="form-control"
+									onChange={formik.handleChange}
+									value={formik.values.priceLte}
+								/>
+							</div>
+
+							{/* Price (GTE) */}
+							<div className="mb-3">
+								<label htmlFor="priceGte" className="form-label">
+									<i className="fas fa-dollar-sign me-2"></i>
+									Price (Min)
+								</label>
+								<input
+									type="number"
+									id="priceGte"
+									name="priceGte"
+									className="form-control"
+									onChange={formik.handleChange}
+									value={formik.values.priceGte}
+								/>
+							</div>
+
+							{/* Submit Button */}
+							<button type="submit" className="btn bg-main text-white w-100">
+								Apply Filters
+							</button>
+						</form>
+					</div>
+				</div>
+
+				{/* Main Content */}
+				<div className="col-md-9 p-3">
+					{/* Search Form */}
+					<form className="mb-4 d-flex">
+						<input
+							type="text"
+							className="border rounded px-2 py-1 flex-grow-1 me-2"
+							placeholder="Search products..."
+							value={searchQuery}
+							onChange={(e) => setSearchQuery(e.target.value)}
+						/>
+					</form>
+
+					<div className="row">
+						{isLoading ? ( // Show placeholder cards when loading
+							Array.from({ length: 6 }).map((_, index) => (
+								<div className="col-md-4 mb-4" key={index}>
+									<div className="card h-100">
+										<div className="card-img-top placeholder-glow">
+											<div
+												className="placeholder w-100"
+												style={{ height: "200px" }}
+											></div>
+										</div>
+										<div className="card-body">
+											<h5 className="card-title placeholder-glow">
+												<span className="placeholder col-6"></span>
+											</h5>
+											<p className="card-text placeholder-glow">
+												<span className="placeholder col-7"></span>
+												<span className="placeholder col-4"></span>
+												<span className="placeholder col-4"></span>
+											</p>
+										</div>
+									</div>
+								</div>
+							))
+						) : isError ? ( // Show error message if fetching fails
+							<p>Failed to fetch products. Please try again later.</p>
+						) : filteredProducts.length > 0 ? ( // Show filtered products
+							filteredProducts.map((product, index) => (
+								<div className="col-md-4 mb-4" key={index}>
 									<Link
 										to={`/product/${product.id}`}
-										className={`${Style.product} staggered-animation align-self-start card text-decoration-none mb-4 col-md-3 col-lg-3 m-2 z-0`}
-										style={{ "--i": index + 1 }}
-										key={index}
+										className={`${Style.product} card text-decoration-none h-100`}
 									>
 										<div className="position-relative">
 											<img
@@ -89,7 +219,6 @@ export default function Products() {
 												alt={product.title}
 												className="w-100 card-img-top"
 											/>
-											{/* {console.log(product._id)} */}
 											<WishListButton
 												productId={product._id}
 												className={Style["wishlist-button"]}
@@ -103,7 +232,7 @@ export default function Products() {
 													addProduct(product._id);
 												}}
 											>
-												<i className="fa-solid fa-cart-plus"></i>
+												<i className="fas fa-cart-plus"></i>
 											</button>
 										</div>
 										<div className="card-body pb-0">
@@ -121,14 +250,75 @@ export default function Products() {
 											<p className="fw-light m-0">{product.price} EGP</p>
 											<span>
 												{product.ratingsAverage}{" "}
-												<i className="fa-solid fa-star rating-color"></i>
+												<i className="fas fa-star rating-color"></i>
 											</span>
 										</div>
 									</Link>
-								);
-							}) : ''
+								</div>
+							))
+						) : (
+							<p>No products found.</p>
 						)}
 					</div>
+
+					{/* Pagination */}
+					{allProducts?.metadata && (
+						<nav aria-label="Page navigation" className="mt-4">
+							<ul className="pagination justify-content-center">
+								{/* Previous Button */}
+								<li
+									className={`page-item ${
+										currentPage === 1 ? "disabled" : "text-main"
+									}`}
+								>
+									<button
+										className="page-link"
+										onClick={() => handlePageChange(currentPage - 1)}
+									>
+										Previous
+									</button>
+								</li>
+
+								{/* Page Numbers */}
+								{Array.from(
+									{ length: allProducts.metadata.numberOfPages },
+									(_, index) => (
+										<li
+											key={index}
+											className={`page-item ${
+												currentPage === index + 1 ? "bg-main" : ""
+											}`}
+										>
+											<button
+												className={`page-link ${
+													currentPage === index + 1 ? "bg-main text-white" : ""
+												}`}
+												onClick={() => handlePageChange(index + 1)}
+											>
+												{index + 1}
+											</button>
+										</li>
+									)
+								)}
+
+								{/* Next Button */}
+								<li
+									className={`page-item ${
+										currentPage === allProducts.metadata.numberOfPages
+											? "disabled"
+											: "text-main"
+									}`}
+								>
+									<button
+										className="page-link text-main"
+										onClick={() => handlePageChange(currentPage + 1)}
+									>
+										Next
+									</button>
+								</li>
+							</ul>
+						</nav>
+					)}
 				</div>
 			</div>
 		</>
