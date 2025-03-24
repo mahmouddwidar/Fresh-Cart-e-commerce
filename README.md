@@ -60,7 +60,7 @@ Here are screenshots that show the Fresh Cart E-commerce application in use.
 
 **Home Page**  
 ![Home Page](https://github.com/user-attachments/assets/97d27084-dfd8-4ca9-8514-ecda8029614a "Home Page")
-![Home Page](https://github.com/user-attachments/assets/0b865671-acb1-4229-af58-b4e9b6fd025f "Home Page")
+![Home Page](https://github.com/user-attachments/assets/4733d218-3de1-4405-8667-10d013b532d3 "Home Page")
 
 ---
 
@@ -70,7 +70,7 @@ Here are screenshots that show the Fresh Cart E-commerce application in use.
 ---
 
 **Cart Page**  
-![Cart Page](https://github.com/user-attachments/assets/0a49e81e-67eb-4e65-9bf5-4575251016c6 "Cart Page")
+![Cart Page](https://github.com/user-attachments/assets/7e91c37d-7864-4a6c-bb7b-072de435693f "Cart Page")
 
 ---
 
@@ -81,6 +81,11 @@ Here are screenshots that show the Fresh Cart E-commerce application in use.
 
 **Addresses**  
 ![Addresses](https://github.com/user-attachments/assets/87de238e-ee60-4765-a910-30d751146ef5 "Addresses")
+
+---
+
+**Orders**  
+![Orders](https://github.com/user-attachments/assets/9a86a9d1-0205-485c-9778-1fe9316726a2 "Orders")
 
 ---
 
@@ -97,7 +102,6 @@ Here are screenshots that show the Fresh Cart E-commerce application in use.
   - `@fortawesome/fontawesome-free` for icons
   - `axios` for HTTP requests
   - `formik` for form handling
-  - `react-detect-offline` for offline detection
   - `react-helmet` for SEO optimization
   - `react-loader-spinner` for loading states
   - `react-query` for data fetching
