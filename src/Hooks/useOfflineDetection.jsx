@@ -1,31 +1,20 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function useOfflineDetection() {
-	const [isOnline, setIsOnline] = useState(true);
-
-	function detectOffline() {
-		window.addEventListener("online", () => {
-			setIsOnline(true);
-		});
-
-		window.addEventListener("offline", () => {
-			setIsOnline(false);
-		});
-	}
+	const [isOnline, setIsOnline] = useState(navigator.onLine);
 
 	useEffect(() => {
-		detectOffline();
+		const handleOnline = () => setIsOnline(true);
+		const handleOffline = () => setIsOnline(false);
+
+		window.addEventListener("online", handleOnline);
+		window.addEventListener("offline", handleOffline);
+
+		return () => {
+			window.removeEventListener("online", handleOnline);
+			window.removeEventListener("offline", handleOffline);
+		};
 	}, []);
 
-	return (
-		<>
-			{!isOnline && (
-				<div className="network-offline border border-danger">
-					<i className="fa-solid fa-wifi text-danger me-2"></i> You&apos;re
-					currently offline
-				</div>
-			)}
-		</>
-	);
+	return isOnline;
 }

@@ -9,7 +9,7 @@ import useOfflineDetection from "../../Hooks/useOfflineDetection";
 
 export default function Layout() {
 	let { setUserToken } = useContext(UserContext);
-	let detectOffline = useOfflineDetection();
+	const isOnline = useOfflineDetection();
 
 	useEffect(() => {
 		if (localStorage.getItem("userToken") !== null) {
@@ -23,7 +23,12 @@ export default function Layout() {
 			<div className="container" style={{ minHeight: "70vh" }}>
 				<Outlet />
 			</div>
-			{detectOffline}
+			{!isOnline && (
+				<div className="network-offline border border-danger">
+					<i className="fa-solid fa-wifi text-danger me-2"></i>
+					You&apos;re currently offline
+				</div>
+			)}
 			<Footer />
 		</>
 	);
