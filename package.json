@@ -19,6 +19,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-helmet": "^6.1.0",
+    "react-image-magnifiers": "^1.4.0",
     "react-loader-spinner": "^6.1.6",
     "react-query": "^3.39.3",
     "react-router-dom": "^7.1.5",

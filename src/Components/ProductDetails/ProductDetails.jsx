@@ -7,11 +7,13 @@ import { CartContext } from "../../Context/CartContext";
 import { Helmet } from "react-helmet";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import WishListButton from "../WishListButton/WishListButton";
+import { MutatingDots } from "react-loader-spinner";
+import Slider from "react-slick";
+import ImageMagnifier from "../ImageMagnifiet/ImageMagnifiet";
 
 export default function ProductDetails() {
 	let params = useParams();
 	let { addToCart } = useContext(CartContext);
-	
 
 	function getProductDetails(id) {
 		return axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`);
@@ -42,10 +44,39 @@ export default function ProductDetails() {
 			});
 		}
 	}
-	
+
+	const settings = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		autoplay: true,
+		autoplaySpeed: 3000,
+		lazyLoad: "ondemand",
+	};
+
 	return (
 		<>
-			{productDetails ? (
+			{isError && (
+				<div className="alert alert-danger p-2">
+					Error happened while getting the product!
+				</div>
+			)}
+			{isLoading ? (
+				<div className="d-flex justify-content-center align-items-center">
+					<MutatingDots
+						visible={true}
+						height="80"
+						width="80"
+						color="#4fa94d"
+						ariaLabel="grid-loading"
+						radius="12.5"
+						wrapperStyle={{}}
+						wrapperClass="grid-wrapper"
+					/>
+				</div>
+			) : productDetails ? (
 				<>
 					<Helmet>
 						<title>{productDetails.title}</title>
@@ -56,11 +87,23 @@ export default function ProductDetails() {
 					</Helmet>
 					<div className="row py-4 align-items-center ">
 						<div className="col-md-4 staggered-animation" style={{ "--i": 1 }}>
-							<img
-								src={productDetails.imageCover}
-								alt={productDetails.title}
-								className="w-100"
-							/>
+							{/* Slider  */}
+							<Slider {...settings} className="mb-4">
+								{productDetails.images.map((img, index) => (
+									<div key={index}>
+										<ImageMagnifier
+											src={img}
+											width="500px"
+											height="500px"
+											magnifierHeight={150}
+											magnifierWidth={150}
+											zoomLevel={2}
+											alt={productDetails.title}
+											className="img-fluid product-image-magnifier"
+										/>
+									</div>
+								))}
+							</Slider>
 						</div>
 						<div className="col-md-8 staggered-animation" style={{ "--i": 2 }}>
 							<h2>{productDetails.title}</h2>
@@ -80,7 +123,10 @@ export default function ProductDetails() {
 								>
 									Add To Cart
 								</button>
-								<WishListButton productId={productDetails._id} className={Style['wishlist-button']} />
+								<WishListButton
+									productId={productDetails._id}
+									className={Style["wishlist-button"]}
+								/>
 							</div>
 						</div>
 					</div>
