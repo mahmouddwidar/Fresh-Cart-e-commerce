@@ -4,6 +4,12 @@
 
 **An e-commerce application built with React.js, featuring a modern UI for selling clothing, electronics, shoes, and more.**
 
+<div style="display: flex; justify-content: center; width: 100%; margin: 20px 0;">
+  <img src="https://github.com/user-attachments/assets/1b33ab45-b1ec-49e9-a858-4dd0f107974d" 
+       alt="Screens" 
+       style="width: 100%; height: auto;">
+</div>
+
 ## Project Overview
 
 This project is an e-commerce platform designed to provide a seamless shopping experience. The application includes features such as:
@@ -65,7 +71,12 @@ Here are screenshots that show the Fresh Cart E-commerce application in use.
 ---
 
 **Product Details Page**  
-![Product Details Page](https://github.com/user-attachments/assets/0760b32c-d47d-479b-a873-2958a8b4d2b13 "Product Details Page")
+![Product Details Page](https://github.com/user-attachments/assets/f8a8fcdc-276a-4df1-81bd-cd58a21b92aa "Product Details Page")
+
+---
+
+**Products Page**  
+![Products Page](https://github.com/user-attachments/assets/e8b7a3ae-528b-45b7-bfc1-9ba7c70206e8 "Products Page")
 
 ---
 
@@ -119,7 +130,7 @@ Here are screenshots that show the Fresh Cart E-commerce application in use.
 
 2. Install the dependencies
    ```bash
-   npm install
+   npm install --force
 
 3. Start the development server
    ```bash
