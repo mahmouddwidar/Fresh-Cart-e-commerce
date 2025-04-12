@@ -1,41 +1,77 @@
 .profileCard {
-    border-radius: 10px;
-    padding: 20px;
-    max-width: 500px;
-    margin: 0 auto;
+	border-radius: 10px;
+	padding: 20px;
+	max-width: 500px;
+	margin: 0 auto;
 }
 
 .profileInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
 }
 
 .infoItem {
-    background: var(--light-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-radius: 6px;
+	background: var(--light-color);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	border-radius: 6px;
 }
 
 .infoLabel {
-    color: var(--text-color);
-    font-weight: 600;
-    margin-right: 200px;
+	color: var(--text-color);
+	font-weight: 600;
+	margin-right: 200px;
 }
 
 .infoValue {
-    color: #6c757d;
+	color: #6c757d;
 }
 
 @media (max-width: 768px) {
-    .profileContent {
-        padding: 20px;
-    }
+	.profileContent {
+		padding: 20px;
+	}
 
-    .infoLabel {
-        margin-right: 50px;
+	.infoLabel {
+		margin-right: 50px;
+	}
+}
+
+.editButton {
+	align-self: flex-end;
+	margin-top: 20px;
+    &:hover {
+        background-color: #0e990e !important;
     }
+}
+
+.profileForm {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.formGroup {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.formGroup label {
+	font-weight: bold;
+	color: #555;
+}
+
+.formButtons {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+button[type='submit']:hover {
+    background-color: #0e990e !important;
 }

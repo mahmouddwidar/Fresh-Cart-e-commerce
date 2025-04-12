@@ -1,1 +1,16 @@
-.Footer {}
+.wrap-mob {
+	flex-wrap: wrap;
+}
+
+.flex-desk {
+    display: block;
+}
+
+@media (min-width: 768px) {
+	.wrap-mob {
+		flex-wrap: nowrap;
+	}
+    .flex-desk {
+        display: flex;
+    }
+}

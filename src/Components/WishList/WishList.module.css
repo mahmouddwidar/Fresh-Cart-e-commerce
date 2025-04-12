@@ -1,68 +1,108 @@
 .wishlistCard {
-    background-color: var(--bg-color);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    transition: box-shadow var(--transition-speed) var(--transition-function);
-    position: relative;
+	background-color: var(--bg-color);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	transition: box-shadow var(--transition-speed) var(--transition-function);
+	position: relative;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .wishlistCard:hover {
-    box-shadow: var(--shadow);
-    border: 1px solid var(--main-color);
-    cursor: pointer;
+	box-shadow: var(--shadow);
+	border: 1px solid var(--main-color);
+	cursor: pointer;
 }
 
 .card-img-top {
-    border-radius: 8px 8px 0 0;
+	border-radius: 8px 8px 0 0;
+	padding: 1rem;
+	object-fit: contain;
+	height: 200px;
+	width: 100%;
+}
+
+.card-body {
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
 }
 
 .card-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-color);
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: var(--text-color);
+	margin-bottom: 0.5rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 100%;
 }
 
 .card-text {
-    font-size: 1rem;
-    color: var(--main-color);
+	font-size: 1rem;
+	color: var(--main-color);
+	margin-top: auto;
 }
 
 .removeButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    z-index: 1;
-    border: 1px solid var(--favorite-color);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color linear var(--transition-speed);
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 5px;
+	z-index: 1;
+	border: 1px solid var(--favorite-color);
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: background-color linear var(--transition-speed);
+	width: 36px;
+	height: 36px;
+}
 
-    &:hover {
-        background-color: var(--favorite-color);
-        & .heartIcon {
-            color: var(--favorite-placeholder-color);
-        }
-    }
+.removeButton:hover {
+	background-color: var(--favorite-color);
+}
+
+.removeButton:hover .heartIcon {
+	color: var(--favorite-placeholder-color);
 }
 
 .heartIcon {
-    color: var(--favorite-color);
-    font-size: 1.5rem;
-    transition: color var(--transition-speed) var(--transition-function);
+	color: var(--favorite-color);
+	font-size: 1.5rem;
+	transition: color var(--transition-speed) var(--transition-function);
 }
 
-.heartIcon:hover {
-    color: var(--favorite-placeholder-color);
+@media (max-width: 767px) {
+	.wishlistCard {
+		max-width: 100%;
+		margin: 0 auto;
+	}
+
+	.card-img-top {
+		height: 180px;
+		padding: 0.75rem;
+	}
+
+	.card-title {
+		font-size: 1rem;
+	}
+
+	.removeButton {
+		width: 32px;
+		height: 32px;
+	}
 }
 
-h5 {
-    white-space: nowrap;
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
+@media (hover: none) {
+	.wishlistCard:hover {
+		box-shadow: none;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+	}
 }

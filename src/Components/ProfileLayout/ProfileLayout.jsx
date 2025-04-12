@@ -46,7 +46,7 @@ export default function ProfileLayout() {
 					}
 					style={{ '--i': 5 }}
 				>
-					<i className="fa-solid fa-heart" style={{ color: "#dc3545" }}></i> Whish List
+					<i className="fa-solid fa-heart" style={{ color: "#dc3545" }}></i> Wish List
 				</NavLink>
 			</nav>
 

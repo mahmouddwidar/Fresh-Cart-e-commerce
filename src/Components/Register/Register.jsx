@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { FallingLines } from "react-loader-spinner";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 export default function Register() {
@@ -173,13 +173,21 @@ export default function Register() {
 							/>
 						</div>
 					) : (
-						<button
-							disabled={!(formik.isValid && formik.dirty)}
-							type="submit"
-							className="btn bg-main text-white"
-						>
-							Register
-						</button>
+						<div className="d-flex justify-content-start align-items-center">
+							<button
+								disabled={!(formik.isValid && formik.dirty)}
+								type="submit"
+								className="btn bg-main text-white me-4"
+							>
+								Register
+							</button>
+							<p className="m-0">
+								Already have account?
+								<Link to={`/login`} className="ms-2">
+									Login
+								</Link>
+							</p>
+						</div>
 					)}
 					{error && (
 						<div className="alert alert-danger mt-3 p-2">Fail, {error}</div>

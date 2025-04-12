@@ -92,7 +92,7 @@ export default function FeaturedProducts() {
 						className="row justify-content-between align-items-center mx-auto staggered-animation"
 						style={{ "--i": 4 }}
 					>
-						{data?.data.data.slice(0, 11).map((product, index) => {
+						{data?.data.data.slice(0, 10).map((product, index) => {
 							return (
 								<Link
 									to={`/product/${product.id}`}
